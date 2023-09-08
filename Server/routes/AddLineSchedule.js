@@ -20,4 +20,22 @@ router.post("/addlineschedule", async (req, res) => {
   }
 });
 
+router.get("/getlineschedule", async (req, res) => {
+  try {
+    const linescheduleData = await LineSchedule.find(); // Fetch all schedule documents
+    res.status(200).json(linescheduleData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+router.get("/getschedule", async (req, res) => {
+  try {
+    const scheduleData = await Schedule.find(); // Fetch all schedule documents
+    res.status(200).json(scheduleData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 module.exports = router;

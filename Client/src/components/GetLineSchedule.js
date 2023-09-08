@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
 
-const ScheduleTable = () => {
+const LinescheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
   const [filterClass, setFilterClass] = useState("");
@@ -11,8 +11,9 @@ const ScheduleTable = () => {
   useEffect(() => {
     // Fetch schedule data when the component mounts
     axios
-      .get("http://localhost:5000/api3/getschedule")
+      .get("http://localhost:5000/api7/getlineschedule")
       .then((response) => {
+        // console.log("Received data:", response.data); // Log the received data
         setScheduleData(response.data);
       })
       .catch((error) => {
@@ -29,7 +30,7 @@ const ScheduleTable = () => {
     if (filterDay && entryDay.indexOf(day) === -1) {
       return false; // Skip entries that don't have the specified day
     }
-    if (filterClass && entry.className !== filterClass) {
+    if (filterClass && entry.location !== filterClass) {
       return false; // Skip entries that don't have the specified class
     }
     return true; // Include all other entries
@@ -51,7 +52,9 @@ const ScheduleTable = () => {
       }}
     >
       <Header />
-      <h2 style={{ color: "white", fontWeight: "bold" }}>Schedule Table</h2>
+      <h2 style={{ color: "white", fontWeight: "bold" }}>
+        Line Schedule Table
+      </h2>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4 mb-3">
@@ -64,26 +67,19 @@ const ScheduleTable = () => {
             />
           </div>
           <div className="col-md-6 col-lg-4 mb-3">
-            <label className="text-white">Filter by Class:</label>
+            <label className="text-white">Filter by Location:</label>
             <select
               className="form-control"
               value={filterClass}
               onChange={(e) => setFilterClass(e.target.value)}
             >
-              <option value="">Select a class</option>
-              <option value="nursery">Nursery</option>
-              <option value="class2">Class 2</option>
-              <option value="class3">Class 3</option>
-              <option value="class4">Class 4</option>
-              <option value="class5">Class 5</option>
-              <option value="Navodaya">Navodaya</option>
-              <option value="class6">Class 6</option>
-              <option value="class7">Class 7</option>
-              <option value="class8">Class 8</option>
-              <option value="class9">Class 9</option>
-              <option value="class10">Class 10</option>
-              <option value="class11">Class 11</option>
-              <option value="class12">Class 12</option>
+              <option value="">Select a location</option>
+              <option value="Chilla">Chilla</option>
+              <option value="Kashiram">Kashiram</option>
+              <option value="Phaphamau">Phaphamau</option>
+              <option value="Nayagaon">Nayagaon</option>
+              <option value="Shivkuti">Shivkuti</option>
+              <option value="Swarajnagar">Swarajnagar</option>
               {/* Add more class options as needed */}
             </select>
           </div>
@@ -93,10 +89,10 @@ const ScheduleTable = () => {
         <table className="table table-bordered table-dark">
           <thead>
             <tr>
-              <th>Class Name</th>
+              <th>Location</th>
               <th>Day</th>
-              <th>Subject</th>
-              <th>Mentor</th>
+              <th>Pickup</th>
+              <th>Drop</th>
             </tr>
           </thead>
           <tbody>
@@ -105,11 +101,11 @@ const ScheduleTable = () => {
                 {entry.schedule.map((scheduleItem, itemIndex) => (
                   <tr key={`${index}-${itemIndex}`}>
                     {itemIndex === 0 ? (
-                      <td rowSpan={entry.schedule.length}>{entry.className}</td>
+                      <td rowSpan={entry.schedule.length}>{entry.location}</td>
                     ) : null}
                     <td>{scheduleItem.day}</td>
-                    <td>{scheduleItem.subject}</td>
-                    <td>{scheduleItem.mentor}</td>
+                    <td>{scheduleItem.pickup}</td>
+                    <td>{scheduleItem.drop}</td>
                   </tr>
                 ))}
               </React.Fragment>
@@ -121,4 +117,4 @@ const ScheduleTable = () => {
   );
 };
 
-export default ScheduleTable;
+export default LinescheduleTable;

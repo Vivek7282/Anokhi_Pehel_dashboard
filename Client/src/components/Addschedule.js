@@ -104,7 +104,22 @@ export default function AddSchedule() {
               value={schedule.className}
               onChange={(e) => onChange(e, -1)}
             >
-              i{/* Add more class options as needed */}
+              <option value="">Select a class</option>
+              <option value="Nursery"> Nursery</option>
+              <option value="class1">Class 1</option>
+              <option value="class2">Class 2</option>
+              <option value="class3">Class 3</option>
+              <option value="class4">Class 4</option>
+              <option value="class5">Class 5</option>
+              <option value="Navodaya">Navodaya</option>
+              <option value="class6">Class 6</option>
+              <option value="class7">Class 7</option>
+              <option value="class8">Class 8</option>
+              <option value="class9">Class 9</option>
+              <option value="class10">Class 10</option>
+              <option value="class11">Class 11</option>
+              <option value="class12">Class 12</option>
+              {/* Add more class options as needed */}
             </select>
           </div>
 

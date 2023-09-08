@@ -55,7 +55,15 @@ const SidebarAdmin = () => {
                 Schedule
               </CDBSidebarMenuItem>
             </NavLink>
-
+            <NavLink
+              exact
+              to="/getlineschedule"
+              activeClassName="activeClicked"
+            >
+              <CDBSidebarMenuItem icon="chart-line">
+                Line Schedule
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink
               exact
               to="/hero404"

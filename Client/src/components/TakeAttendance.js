@@ -40,6 +40,7 @@ const TakeAttendance = () => {
             >
               <option value="">Select a class</option>
               <option value="Nursery"> Nursery</option>
+              <option value="class1">Class 1</option>
               <option value="class2">Class 2</option>
               <option value="class3">Class 3</option>
               <option value="class4">Class 4</option>
