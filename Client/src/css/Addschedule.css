@@ -1,0 +1,14 @@
+/* AddSchedule.css */
+
+/* Default styles for smaller screens (e.g., mobile) */
+form {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width as needed */
+}
+
+/* Media query for larger screens (e.g., desktop) */
+@media (min-width: 768px) {
+  form {
+    width: 50%; /* Adjust the width as needed for desktop */
+  }
+}
