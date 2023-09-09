@@ -42,12 +42,17 @@ const StudentList = () => {
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Header />
+      <h2 className="text-center text-white">Students List</h2>
       <div className="container mt-5">
-        <h2 className="text-center text-white">Students List</h2>
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4 mb-3">
             <label className="text-white">Filter by Name:</label>
             <input

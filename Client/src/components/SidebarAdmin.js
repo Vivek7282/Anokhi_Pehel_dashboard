@@ -27,9 +27,6 @@ const SidebarAdmin = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact to="/addstudent" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Student</CDBSidebarMenuItem>
             </NavLink>
@@ -81,17 +78,6 @@ const SidebarAdmin = () => {
             >
               <CDBSidebarMenuItem icon="chart-line">
                 Line Schedule
-              </CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink
-              exact
-              to="/hero404"
-              target="_blank"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

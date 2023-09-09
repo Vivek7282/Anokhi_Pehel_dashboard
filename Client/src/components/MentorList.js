@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
-
+import Footer from "./Footer";
 const MentorList = () => {
   const [users, setUsers] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -37,12 +38,17 @@ const MentorList = () => {
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Header />
       <div className="container mt-5">
         <h2 className="text-center text-white">Mentors List</h2>
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4 mb-3">
             <label className="text-white">Filter by Name:</label>
             <input
@@ -66,34 +72,36 @@ const MentorList = () => {
           <table className="table table-bordered table-dark">
             <thead>
               <tr>
-                <th>Photo</th>
                 <th>Name</th>
                 <th>Regnumber</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Profile</th> {/* Add a new column for the Profile button */}
               </tr>
             </thead>
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user._id}>
-                  <td>
-                    <img
-                      src={`/uploads/${user.photo}`}
-                      alt={user.name}
-                      className="img-fluid"
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
-                    />
-                  </td>
                   <td>{user.name}</td>
                   <td>{user.regnumber}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
+                  <td>
+                    <Link
+                      //  navigate(`/attendance?class=${selectedClass}`);
+                      to={`/mentorprofile?user._id=${user._id}`}
+                      className="btn btn-primary"
+                    >
+                      View Profile
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

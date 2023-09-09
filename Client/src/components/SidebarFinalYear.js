@@ -27,15 +27,15 @@ const SidebarAdmin = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact to="/addstudent" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Student</CDBSidebarMenuItem>
             </NavLink>
 
             <NavLink exact to="/students" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Student List</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/mentors" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Mentors List</CDBSidebarMenuItem>
             </NavLink>
 
             <NavLink exact to="/takeattendance" activeClassName="activeClicked">

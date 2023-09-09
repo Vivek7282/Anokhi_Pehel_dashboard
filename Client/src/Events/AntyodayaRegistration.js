@@ -4,7 +4,7 @@ import axios from "axios";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import Footer from "./Footer";
-export default function Signup() {
+export default function AntyodayaRegistration() {
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",

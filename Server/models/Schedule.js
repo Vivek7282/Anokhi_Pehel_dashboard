@@ -21,10 +21,6 @@ const ScheduleSchema = new Schema({
         type: String,
         required: true,
       },
-      phone: {
-        type: String,
-        required: true,
-      },
     },
   ],
 });

@@ -2,24 +2,52 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-
+import Footer from "./Footer";
 const LinescheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
-  const [filterClass, setFilterClass] = useState("");
+  const [filterLocation, setFilterLocation] = useState("");
+  const [userData, setUserData] = useState({}); // Store user information
 
   useEffect(() => {
     // Fetch schedule data when the component mounts
     axios
       .get("http://localhost:5000/api7/getlineschedule")
       .then((response) => {
-        // console.log("Received data:", response.data); // Log the received data
         setScheduleData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
+
+  useEffect(() => {
+    // Fetch user information when the component mounts
+    axios
+      .get("http://localhost:5000/api2/mentors")
+      .then((response) => {
+        // Convert the response data into a user information object
+        const userDataObject = {};
+        response.data.forEach((user) => {
+          userDataObject[user._id] = {
+            name: user.name,
+            phone: user.phone,
+          };
+        });
+        setUserData(userDataObject);
+      })
+      .catch((error) => {
+        console.error("Error fetching user information: ", error);
+      });
+  }, []);
+
+  // Function to get user name and phone based on user_id
+  const getUserInfo = (user_id) => {
+    const user = userData[user_id];
+    return user
+      ? { name: user.name, phone: user.phone }
+      : { name: "Unknown", phone: "Unknown" };
+  };
 
   const filteredSchedule = scheduleData.filter((entry) => {
     // Convert filterDay to lowercase for case-insensitive comparison
@@ -30,8 +58,8 @@ const LinescheduleTable = () => {
     if (filterDay && entryDay.indexOf(day) === -1) {
       return false; // Skip entries that don't have the specified day
     }
-    if (filterClass && entry.location !== filterClass) {
-      return false; // Skip entries that don't have the specified class
+    if (filterLocation && entry.location !== filterLocation) {
+      return false; // Skip entries that don't have the specified location
     }
     return true; // Include all other entries
   });
@@ -70,8 +98,8 @@ const LinescheduleTable = () => {
             <label className="text-white">Filter by Location:</label>
             <select
               className="form-control"
-              value={filterClass}
-              onChange={(e) => setFilterClass(e.target.value)}
+              value={filterLocation}
+              onChange={(e) => setFilterLocation(e.target.value)}
             >
               <option value="">Select a location</option>
               <option value="Chilla">Chilla</option>
@@ -80,7 +108,7 @@ const LinescheduleTable = () => {
               <option value="Nayagaon">Nayagaon</option>
               <option value="Shivkuti">Shivkuti</option>
               <option value="Swarajnagar">Swarajnagar</option>
-              {/* Add more class options as needed */}
+              {/* Add more location options as needed */}
             </select>
           </div>
         </div>
@@ -91,28 +119,40 @@ const LinescheduleTable = () => {
             <tr>
               <th>Location</th>
               <th>Day</th>
-              <th>Pickup</th>
-              <th>Drop</th>
+              <th>Pickup Name</th> {/* Add Pickup Name column */}
+              <th>Pickup Phone</th> {/* Add Pickup Phone column */}
+              <th>Drop Name</th> {/* Add Drop Name column */}
+              <th>Drop Phone</th> {/* Add Drop Phone column */}
             </tr>
           </thead>
           <tbody>
             {filteredSchedule.map((entry, index) => (
               <React.Fragment key={index}>
-                {entry.schedule.map((scheduleItem, itemIndex) => (
-                  <tr key={`${index}-${itemIndex}`}>
-                    {itemIndex === 0 ? (
-                      <td rowSpan={entry.schedule.length}>{entry.location}</td>
-                    ) : null}
-                    <td>{scheduleItem.day}</td>
-                    <td>{scheduleItem.pickup}</td>
-                    <td>{scheduleItem.drop}</td>
-                  </tr>
-                ))}
+                {entry.schedule.map((scheduleItem, itemIndex) => {
+                  const pickupInfo = getUserInfo(scheduleItem.pickup);
+                  const dropInfo = getUserInfo(scheduleItem.drop);
+                  return (
+                    <tr key={`${index}-${itemIndex}`}>
+                      {itemIndex === 0 ? (
+                        <td rowSpan={entry.schedule.length}>
+                          {entry.location}
+                        </td>
+                      ) : null}
+                      <td>{scheduleItem.day}</td>
+
+                      <td>{pickupInfo.name}</td>
+                      <td>{pickupInfo.phone}</td>
+                      <td>{dropInfo.name}</td>
+                      <td>{dropInfo.phone}</td>
+                    </tr>
+                  );
+                })}
               </React.Fragment>
             ))}
           </tbody>
         </table>
       </div>
+      <Footer />
     </div>
   );
 };

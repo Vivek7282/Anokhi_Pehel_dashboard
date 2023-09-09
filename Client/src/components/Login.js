@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "./Footer";
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
@@ -126,6 +126,7 @@ export default function Login() {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 }

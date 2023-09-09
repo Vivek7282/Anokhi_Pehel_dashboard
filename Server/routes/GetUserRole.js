@@ -36,8 +36,17 @@ router.get("/getUserRoleByEmail", async (req, res) => {
 
 router.get("/mentors", async (req, res) => {
   try {
-    const mentors = await User.find({}, "name"); // Fetch all mentor names
-    res.json(mentors);
+    // Fetch all mentors with both name and phone fields
+    const mentors = await User.find({}, "name phone");
+
+    // Map the mentors to include only the necessary fields in the response
+    const mentorData = mentors.map((mentor) => ({
+      _id: mentor._id,
+      name: mentor.name,
+      phone: mentor.phone,
+    }));
+
+    res.json(mentorData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

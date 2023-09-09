@@ -135,7 +135,7 @@ export default function AddSchedule() {
                 >
                   <option value="">Select a mentor</option>
                   {userNames.map((user) => (
-                    <option key={user._id} value={user.name}>
+                    <option key={user._id} value={user._id}>
                       {user.name}
                     </option>
                   ))}
@@ -154,7 +154,7 @@ export default function AddSchedule() {
                 >
                   <option value="">Select a mentor</option>
                   {userNames.map((user) => (
-                    <option key={user._id} value={user.name}>
+                    <option key={user._id} value={user._id}>
                       {user.name}
                     </option>
                   ))}

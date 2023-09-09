@@ -130,7 +130,6 @@ export default function AddSchedule() {
                   {daySchedule.day}
                 </label>
               </div>
-
               <div className="m-3">
                 <label htmlFor={`subject${index}`} className="form-label">
                   Subject
@@ -144,6 +143,7 @@ export default function AddSchedule() {
                   onChange={(e) => onChange(e, index)}
                 />
               </div>
+
               <div className="m-3">
                 <label htmlFor={`mentor${index}`} className="form-label">
                   Mentor
@@ -157,7 +157,7 @@ export default function AddSchedule() {
                 >
                   <option value="">Select a mentor</option>
                   {userNames.map((user) => (
-                    <option key={user._id} value={user.name}>
+                    <option key={user._id} value={user._id}>
                       {user.name}
                     </option>
                   ))}

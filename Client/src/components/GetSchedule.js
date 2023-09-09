@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-
+import Footer from "./Footer";
 const ScheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
   const [filterClass, setFilterClass] = useState("");
+  const [mentorsInfo, setMentorsInfo] = useState({}); // Store mentor information
 
   useEffect(() => {
     // Fetch schedule data when the component mounts
@@ -19,6 +20,35 @@ const ScheduleTable = () => {
         console.error(error);
       });
   }, []);
+
+  useEffect(() => {
+    // Fetch mentor information when the component mounts
+    axios
+      .get("http://localhost:5000/api2/mentors")
+      .then((response) => {
+        // Convert the response data into a mentor information object
+        const mentorData = {};
+        response.data.forEach((mentor) => {
+          mentorData[mentor._id] = {
+            name: mentor.name,
+            phone: mentor.phone,
+          };
+        });
+        setMentorsInfo(mentorData);
+        console.log("Mentors Info:", mentorData); // Debugging
+      })
+      .catch((error) => {
+        console.error("Error fetching mentors: ", error);
+      });
+  }, []);
+
+  // Function to get mentor name and phone based on user_id
+  const getMentorInfo = (user_id) => {
+    const mentor = mentorsInfo[user_id];
+    return mentor
+      ? { name: mentor.name, phone: mentor.phone }
+      : { name: "Unknown", phone: "Unknown" };
+  };
 
   const filteredSchedule = scheduleData.filter((entry) => {
     // Convert filterDay to lowercase for case-insensitive comparison
@@ -98,26 +128,34 @@ const ScheduleTable = () => {
               <th>Day</th>
               <th>Subject</th>
               <th>Mentor</th>
+              <th>Phone</th> {/* Add phone column */}
             </tr>
           </thead>
           <tbody>
             {filteredSchedule.map((entry, index) => (
               <React.Fragment key={index}>
-                {entry.schedule.map((scheduleItem, itemIndex) => (
-                  <tr key={`${index}-${itemIndex}`}>
-                    {itemIndex === 0 ? (
-                      <td rowSpan={entry.schedule.length}>{entry.className}</td>
-                    ) : null}
-                    <td>{scheduleItem.day}</td>
-                    <td>{scheduleItem.subject}</td>
-                    <td>{scheduleItem.mentor}</td>
-                  </tr>
-                ))}
+                {entry.schedule.map((scheduleItem, itemIndex) => {
+                  const mentorInfo = getMentorInfo(scheduleItem.mentor);
+                  return (
+                    <tr key={`${index}-${itemIndex}`}>
+                      {itemIndex === 0 ? (
+                        <td rowSpan={entry.schedule.length}>
+                          {entry.className}
+                        </td>
+                      ) : null}
+                      <td>{scheduleItem.day}</td>
+                      <td>{scheduleItem.subject}</td>
+                      <td>{mentorInfo.name}</td>
+                      <td>{mentorInfo.phone}</td>
+                    </tr>
+                  );
+                })}
               </React.Fragment>
             ))}
           </tbody>
         </table>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -68,15 +68,9 @@ const Sidebar = () => {
                 Line Schedule
               </CDBSidebarMenuItem>
             </NavLink>
-
-            <NavLink
-              exact
-              to="/hero404"
-              target="_blank"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
+            <NavLink exact to="/antyodayareg" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">
+                Atyodaya Registraion
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

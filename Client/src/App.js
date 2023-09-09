@@ -17,6 +17,8 @@ import AttendancePage from "./components/AttendancePage";
 import AttendanceTable from "./components/AttendanceTable";
 import AddScore from "./components/AddScore";
 import ScorePage from "./components/ScorePage";
+import MentorProfile from "./components/MentorProfile";
+import AntyodayaRegistration from "./Events/AntyodayaRegistration";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/addscore" element={<AddScore />} />
           <Route path="/score" element={<ScorePage />} />
+          <Route path="/mentorprofile" element={<MentorProfile />} />
 
           <Route path="/attendancerecord" element={<AttendanceTable />} />
           <Route
@@ -46,6 +49,11 @@ function App() {
           <Route exact path="/mentors" element={<MentorList />} />
           <Route exact path="/addschedule" element={<Addschedule />} />
           <Route exact path="/addlineschedule" element={<AddLineSchedule />} />
+          <Route
+            exact
+            path="/antyodayareg"
+            element={<AntyodayaRegistration />}
+          />
           {/* <Route exact path="/class/:class" component={StudentList} /> */}
         </Routes>
       </div>
