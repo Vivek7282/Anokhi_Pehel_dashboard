@@ -33,6 +33,7 @@ export default function Signup() {
         console.log(res);
         // Check if the response indicates success (you should have a proper way to determine success)
         if (res.data === "User Added") {
+          alert("Student submitted successfully!");
           // Clear the form data by resetting the state
           setCredentials({
             name: "",

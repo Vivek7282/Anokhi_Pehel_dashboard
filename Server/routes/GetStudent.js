@@ -222,8 +222,8 @@ router.get("/getLineSchedule1ByMentorId", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-router.delete("/removementor", async (req, res) => {
-  const mentorId = req.query.mentorId;
+router.delete("/removementor/:mentorId", async (req, res) => {
+  const mentorId = req.params.mentorId;
   console.log("Vivek:- ", mentorId);
   try {
     // Find and remove the mentor by ID from the database

@@ -37,6 +37,8 @@ export default function AddStudents() {
         console.log(res);
         // Check if the response indicates success (you should have a proper way to determine success)
         if (res.data === "Student Added") {
+          // Show an alert message
+          alert("Student submitted successfully!");
           // Clear the form data by resetting the state
           setCredentials({
             name: "",
