@@ -1,86 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { useLocation } from "react-router-dom";
-// import axios from "axios";
-// import Header from "./Header";
-// import Footer from "./Footer";
-// import myImage from "../image/backgroundImage.jpeg";
-// import "../css/ScorePage.css"; // Import your CSS file
-
-// const MentorProfile = () => {
-//   const location = useLocation();
-//   const searchParams = new URLSearchParams(location.search);
-//   const userId = searchParams.get("user._id");
-//   const [mentor, setMentor] = useState(null); // Store mentor data in a single variable
-
-//   useEffect(() => {
-//     // Debugging: Check the value of userId
-//     console.log("userId:", userId);
-
-//     // Fetch mentor data when the component mounts
-//     if (userId) {
-//       axios
-//         .get(`http://localhost:5000/api1/getmentorsByUserId?userid=${userId}`)
-//         .then((res) => {
-//           console.log("Fetched mentor data:", res.data); // Log fetched data
-//           setMentor(res.data); // Assuming the response is an array, take the first item
-//         })
-//         .catch((err) => {
-//           console.error("Error fetching mentor: ", err);
-//         });
-//     }
-//   }, [userId]);
-
-//   return (
-//     <div
-//       className="mentor-profile-container"
-//       style={{
-//         backgroundImage: `url(${myImage})`,
-//         backgroundSize: "cover",
-//         backgroundAttachment: "fixed",
-//         backgroundRepeat: "no-repeat",
-//         minHeight: "100vh",
-//         display: "flex",
-//         flexDirection: "column",
-//         alignItems: "center",
-//         justifyContent: "center",
-//       }}
-//     >
-//       <Header />
-//       <div className="mentor-profile">
-//         {mentor ? (
-//           <div className="mentor-card">
-//             <img
-//               src={`/uploads/${mentor.photo}`}
-//               alt={mentor.name}
-//               className="mentor-photo"
-//             />
-//             <div className="mentor-details">
-//               <h3>{mentor.name}</h3>
-//               <p>
-//                 <span className="highlight-text">Registration Number:</span>{" "}
-//                 <span className="custom-color">{mentor.regnumber}</span>
-//               </p>
-//               <p>
-//                 <span className="highlight-text">Email:</span>{" "}
-//                 <span className="custom-color">{mentor.email}</span>
-//               </p>
-//               <p>
-//                 <span className="highlight-text">Phone:</span>{" "}
-//                 <span className="custom-color">{mentor.phone}</span>
-//               </p>
-//             </div>
-//           </div>
-//         ) : (
-//           <p>No mentor data available.</p>
-//         )}
-//       </div>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default MentorProfile;
-
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -88,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
+import profile from "../image/profile.png";
 
 const ScorePage = () => {
   const location = useLocation();
@@ -106,7 +24,7 @@ const ScorePage = () => {
       axios
         .get(`http://localhost:5000/api1/getmentorsByUserId?userid=${userId}`)
         .then((res) => {
-          console.log("Fetched mentor data:", res.data); // Log fetched data
+          //   console.log("Fetched mentor data:", res.data); // Log fetched data
           setMentor(res.data); // Assuming the response is an array, take the first item
         })
         .catch((err) => {
@@ -119,7 +37,7 @@ const ScorePage = () => {
           `http://localhost:5000/api1/getClassScheduleByMentorId?mentorId=${userId}`
         )
         .then((res1) => {
-          console.log("Fetched class schedule data:", res1.data); // Log fetched data
+          //   console.log("Fetched class schedule data:", res1.data); // Log fetched data
           setClassSchedule(res1.data);
         })
         .catch((err) => {
@@ -131,7 +49,7 @@ const ScorePage = () => {
           `http://localhost:5000/api1/getLineScheduleByMentorId?mentorId=${userId}`
         )
         .then((res2) => {
-          console.log("Fetched class schedule data:", res2.data); // Log fetched data
+          //   console.log("Fetched class schedule data:", res2.data); // Log fetched data
           setLineSchedule(res2.data);
         })
         .catch((err) => {
@@ -143,7 +61,7 @@ const ScorePage = () => {
           `http://localhost:5000/api1/getLineSchedule1ByMentorId?mentorId=${userId}`
         )
         .then((res3) => {
-          console.log("Fetched class schedule data:", res3.data); // Log fetched data
+          //   console.log("Fetched class schedule data:", res3.data); // Log fetched data
           setLineSchedule1(res3.data);
         })
         .catch((err) => {
@@ -171,11 +89,8 @@ const ScorePage = () => {
       <div className="mentor-profile">
         {mentor ? (
           <div className="mentor-card">
-            <img
-              src={`/uploads/${mentor.photo}`}
-              alt={mentor.name}
-              className="mentor-photo"
-            />
+            <img src={profile} className="mentor-photo" />
+
             <div className="mentor-details">
               <h3>{mentor.name}</h3>
               <p>
@@ -214,7 +129,6 @@ const ScorePage = () => {
                 </ul>
               </div>
             </div>
-
             <div className="class-schedule-container">
               <h2 className="schedule-title">Line Schedule</h2>
               <div className="class-schedule">

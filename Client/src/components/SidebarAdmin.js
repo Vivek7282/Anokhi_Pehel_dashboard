@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import WelcomeCard from "./WelcomeCard";
+import "../css/ScorePage.css";
+import Header from "./Header";
+import myImage from "../image/backgroundImage.jpeg";
+import Footer from "./Footer";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -10,6 +16,14 @@ import {
 import { NavLink } from "react-router-dom";
 
 const SidebarAdmin = () => {
+  const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState("");
+  useEffect(() => {
+    // Fetch userId from local storage
+    const storedUserEmail = localStorage.getItem("userEmail");
+
+    setUserEmail(storedUserEmail);
+  }, []);
   return (
     <div
       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
@@ -53,6 +67,14 @@ const SidebarAdmin = () => {
             <NavLink exact to="/adduser" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Mentor</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/removementor" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Remove Mentor</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/removestudent" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">
+                Remove Student
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/addschedule" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Schedule</CDBSidebarMenuItem>
             </NavLink>
@@ -80,6 +102,13 @@ const SidebarAdmin = () => {
                 Line Schedule
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink
+              exact
+              to={`/editprofile?userEmail=${userEmail}`}
+              activeClassName="activeClicked"
+            >
+              <CDBSidebarMenuItem icon="circle">Profile</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -91,6 +120,9 @@ const SidebarAdmin = () => {
           ></div>
         </CDBSidebarFooter>
       </CDBSidebar>
+      <div className="welcomecard">
+        <WelcomeCard userEmail={userEmail} /> <Footer />
+      </div>
     </div>
   );
 };

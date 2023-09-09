@@ -3,17 +3,12 @@ const User = require("../models/User");
 const Student = require("../models/Student");
 const Schedule = require("../models/Schedule");
 const LineSchedule = require("../models/LineSchedule");
-// const Order = require("../models/Orders");
+
 const router = express.Router();
 const cors = require("cors");
-const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
-const path = require("path");
+
 const { v4: uuidv4 } = require("uuid");
-const axios = require("axios");
-const fetch = require("../middleware/fetchdetails");
-const jwtSecret = "HaHa";
+
 const multer = require("multer");
 const app = express();
 app.use(cors());
@@ -124,7 +119,6 @@ router.get("/getmentorsByUserId", async (req, res) => {
     // Respond with the user information
     res.json(userInfo);
   } catch (error) {
-    console.log("hi");
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -145,12 +139,32 @@ router.get("/getClassScheduleByMentorId", async (req, res) => {
     );
 
     if (classSchedule && classSchedule.length > 0) {
-      console.log(classSchedule);
       res.json(classSchedule);
     } else {
       console.log("Data not found");
       res.json({ message: "Data not found" });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/getmentorsByEmail", async (req, res) => {
+  // Extract the user ID from the request query parameters
+  const user_id = req.query.email;
+
+  try {
+    // Query the database to retrieve the user based on the ID
+    const user = await User.find({ email: user_id });
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Respond with the user information
+    res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -172,7 +186,6 @@ router.get("/getLineScheduleByMentorId", async (req, res) => {
     );
 
     if (lineSchedule && lineSchedule.length > 0) {
-      console.log(lineSchedule);
       res.json(lineSchedule);
     } else {
       console.log("Data not found");
@@ -199,7 +212,6 @@ router.get("/getLineSchedule1ByMentorId", async (req, res) => {
     );
 
     if (lineSchedule && lineSchedule.length > 0) {
-      console.log(lineSchedule);
       res.json(lineSchedule);
     } else {
       console.log("Data not found");
@@ -208,6 +220,27 @@ router.get("/getLineSchedule1ByMentorId", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+router.delete("/removementor", async (req, res) => {
+  const mentorId = req.query.mentorId;
+  console.log("Vivek:- ", mentorId);
+  try {
+    // Find and remove the mentor by ID from the database
+    const removedMentor = await User.findByIdAndRemove(mentorId);
+
+    if (!removedMentor) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Mentor not found." });
+    }
+
+    return res.json({ success: true, message: "Mentor removed successfully." });
+  } catch (error) {
+    console.error("Error removing mentor:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 });
 

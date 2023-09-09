@@ -69,3 +69,72 @@
   text-align: center;
   font-weight: bold;
 }
+.welcomecard {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  background-color: #111213;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .welcomecard {
+    margin: 10px 0; /* Reduce top and bottom margin to save space */
+    padding: 10px; /* Reduce padding to save space */
+  }
+}
+.password-change {
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.password-change h3 {
+  margin-bottom: 10px;
+}
+
+.password-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.password-input label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.password-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

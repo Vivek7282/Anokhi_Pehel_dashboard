@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import WelcomeCard from "./WelcomeCard";
+import "../css/ScorePage.css";
+import Header from "./Header";
+import myImage from "../image/backgroundImage.jpeg";
+import Footer from "./Footer";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -10,17 +16,21 @@ import {
 import { NavLink } from "react-router-dom";
 
 const SidebarAdmin = () => {
+  const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState("");
+  useEffect(() => {
+    // Fetch userId from local storage
+    const storedUserEmail = localStorage.getItem("userEmail");
+
+    setUserEmail(storedUserEmail);
+  }, []);
   return (
     <div
       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a
-            href="/"
-            className="text-decoration-none"
-            style={{ color: "inherit" }}
-          >
+          <a className="text-decoration-none" style={{ color: "inherit" }}>
             Sidebar
           </a>
         </CDBSidebarHeader>
@@ -66,13 +76,10 @@ const SidebarAdmin = () => {
             </NavLink>
             <NavLink
               exact
-              to="/hero404"
-              target="_blank"
+              to={`/editprofile?userEmail=${userEmail}`}
               activeClassName="activeClicked"
             >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="circle">Profile</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
@@ -85,6 +92,9 @@ const SidebarAdmin = () => {
           ></div>
         </CDBSidebarFooter>
       </CDBSidebar>
+      <div className="welcomecard">
+        <WelcomeCard userEmail={userEmail} /> <Footer />
+      </div>
     </div>
   );
 };

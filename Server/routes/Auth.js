@@ -44,8 +44,9 @@ router.route("/createuser").post(upload.single("photo"), async (req, res) => {
   const phone = req.body.phone;
   const role = req.body.role;
   const regnumber = req.body.regnumber;
-  const Ppassword = req.body.password;
   const photo = req.file.filename;
+  const Ppassword = req.body.password;
+
   const saltRounds = 10;
 
   // console.log(name, "", email, "", Ppassword);

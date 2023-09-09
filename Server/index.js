@@ -25,6 +25,9 @@ app.use("/api4", require("./routes/SubmitAttendance"));
 app.use("/api5", require("./routes/GetAttendance"));
 app.use("/api6", require("./routes/AddScore"));
 app.use("/api7", require("./routes/AddLineSchedule"));
+app.use("/api8", require("./routes/GetMentorByEmail"));
+app.use("/api9", require("./routes/ChangePassword"));
+app.use("/api10", require("./routes/RemoveMentor"));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

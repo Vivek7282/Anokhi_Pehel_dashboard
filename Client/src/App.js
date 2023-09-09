@@ -18,7 +18,10 @@ import AttendanceTable from "./components/AttendanceTable";
 import AddScore from "./components/AddScore";
 import ScorePage from "./components/ScorePage";
 import MentorProfile from "./components/MentorProfile";
+import EditProfile from "./components/EditProfile";
 import AntyodayaRegistration from "./Events/AntyodayaRegistration";
+import RemoveStudent from "./Remove/RemoveStudent";
+import RemoveMentor from "./Remove/RemoveMentor";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -32,6 +35,7 @@ function App() {
           <Route exact path="/dashboardadmin" element={<DashboardAdmin />} />
           <Route exact path="/takeattendance" element={<TakeAttendance />} />
           <Route path="/attendance" element={<AttendancePage />} />
+          <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/addscore" element={<AddScore />} />
           <Route path="/score" element={<ScorePage />} />
           <Route path="/mentorprofile" element={<MentorProfile />} />
@@ -49,6 +53,8 @@ function App() {
           <Route exact path="/mentors" element={<MentorList />} />
           <Route exact path="/addschedule" element={<Addschedule />} />
           <Route exact path="/addlineschedule" element={<AddLineSchedule />} />
+          <Route exact path="/removementor" element={<RemoveMentor />} />
+          <Route exact path="/removestudent" element={<RemoveStudent />} />
           <Route
             exact
             path="/antyodayareg"
