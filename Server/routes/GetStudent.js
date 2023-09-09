@@ -244,4 +244,29 @@ router.delete("/removementor/:mentorId", async (req, res) => {
   }
 });
 
+router.delete("/removestudent/:studentId", async (req, res) => {
+  const studentId = req.params.studentId;
+
+  try {
+    // Find and remove the student by ID from the database
+    const removedStudent = await Student.findByIdAndRemove(studentId);
+
+    if (!removedStudent) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Student not found." });
+    }
+
+    return res.json({
+      success: true,
+      message: "Student removed successfully.",
+    });
+  } catch (error) {
+    console.error("Error removing student:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;

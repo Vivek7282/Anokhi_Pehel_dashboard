@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 
@@ -33,6 +35,24 @@ const StudentList = () => {
       studentLocation.includes(filterLocation.toLowerCase())
     );
   });
+
+  const handleDownloadTable = () => {
+    const doc = new jsPDF();
+
+    doc.autoTable({
+      head: [["Name", "Class", "Phone", "Location", "Mode", "School"]],
+      body: filteredStudents.map((student) => [
+        student.name,
+        student.className,
+        student.phone,
+        student.location,
+        student.mode,
+        student.school,
+      ]),
+    });
+
+    doc.save("students_table.pdf");
+  };
 
   return (
     <div
@@ -107,6 +127,7 @@ const StudentList = () => {
             </tbody>
           </table>
         </div>
+        <button onClick={handleDownloadTable}>Download Table as PDF</button>
       </div>
     </div>
   );

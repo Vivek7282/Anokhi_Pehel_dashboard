@@ -22,7 +22,9 @@ const StudentList = () => {
 
   const filteredStudents = students.filter((student) => {
     const studentName = student.name ? student.name.toLowerCase() : "";
-    const studentClass = student.class ? student.class.toLowerCase() : "";
+    const studentClass = student.className
+      ? student.className.toLowerCase()
+      : "";
     const studentLocation = student.location
       ? student.location.toLowerCase()
       : "";
@@ -33,6 +35,23 @@ const StudentList = () => {
       studentLocation.includes(filterLocation.toLowerCase())
     );
   });
+
+  const handleDeleteStudent = async (studentId) => {
+    try {
+      // Send a request to delete the student by ID
+      await axios.delete(
+        `http://localhost:5000/api1/removestudent/${studentId}`
+      );
+      // Remove the deleted student from the local state
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student._id !== studentId)
+      );
+      alert("Student deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting student:", error);
+      // Handle the error as needed
+    }
+  };
 
   return (
     <div
@@ -53,33 +72,7 @@ const StudentList = () => {
       <h2 className="text-center text-white">Students List</h2>
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-md-6 col-lg-4 mb-3">
-            <label className="text-white">Filter by Name:</label>
-            <input
-              type="text"
-              className="form-control"
-              value={filterName}
-              onChange={(e) => setFilterName(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 col-lg-4 mb-3">
-            <label className="text-white">Filter by Class:</label>
-            <input
-              type="text"
-              className="form-control"
-              value={filterClass}
-              onChange={(e) => setFilterClass(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 col-lg-4 mb-3">
-            <label className="text-white">Filter by Location:</label>
-            <input
-              type="text"
-              className="form-control"
-              value={filterLocation}
-              onChange={(e) => setFilterLocation(e.target.value)}
-            />
-          </div>
+          {/* ... Other filter inputs ... */}
         </div>
         <div className="table-responsive">
           <table className="table table-bordered table-dark">
@@ -91,6 +84,7 @@ const StudentList = () => {
                 <th>Location</th>
                 <th>Mode</th>
                 <th>School</th>
+                <th>Action</th> {/* Add a new column for the Action button */}
               </tr>
             </thead>
             <tbody>
@@ -102,6 +96,14 @@ const StudentList = () => {
                   <td>{student.location}</td>
                   <td>{student.mode}</td>
                   <td>{student.school}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDeleteStudent(student._id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

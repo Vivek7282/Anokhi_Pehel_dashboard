@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import Footer from "./Footer";
+import jsPDF from "jspdf";
+import "jspdf-autotable"; // Import the autotable plugin
+
 const MentorList = () => {
   const [users, setUsers] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -29,6 +32,25 @@ const MentorList = () => {
       userRegnumber.includes(filterRegnumber.toLowerCase())
     );
   });
+
+  const handleDownloadTable = () => {
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
+
+    // Add the table to the PDF document
+    doc.autoTable({
+      head: [["Name", "Regnumber", "Phone", "Email"]],
+      body: filteredUsers.map((user) => [
+        user.name,
+        user.regnumber,
+        user.phone,
+        user.email,
+      ]),
+    });
+
+    // Save the PDF with a specific name
+    doc.save("mentors_table.pdf");
+  };
 
   return (
     <div
@@ -76,7 +98,6 @@ const MentorList = () => {
                 <th>Regnumber</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Profile</th> {/* Add a new column for the Profile button */}
               </tr>
             </thead>
             <tbody>
@@ -86,20 +107,12 @@ const MentorList = () => {
                   <td>{user.regnumber}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
-                  <td>
-                    <Link
-                      //  navigate(`/attendance?class=${selectedClass}`);
-                      to={`/mentorprofile?user._id=${user._id}`}
-                      className="btn btn-primary"
-                    >
-                      View Profile
-                    </Link>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <button onClick={handleDownloadTable}>Download Table as PDF</button>
       </div>
       <Footer />
     </div>

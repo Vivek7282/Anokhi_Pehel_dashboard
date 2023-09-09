@@ -43,6 +43,7 @@ const MentorList = () => {
       // After successful removal, update the user list
       const updatedUsers = users.filter((user) => user._id !== mentorId);
       setUsers(updatedUsers);
+      alert("Mentor deleted successfully.");
     } catch (error) {
       console.error("Error removing mentor:", error);
     }
