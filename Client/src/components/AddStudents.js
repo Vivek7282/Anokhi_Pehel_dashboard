@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
+import Image from "../image/340434.png";
 export default function AddStudents() {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -67,7 +68,7 @@ export default function AddStudents() {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
@@ -81,7 +82,7 @@ export default function AddStudents() {
       <Header />
       <div className="container d-flex justify-content-center align-items-center">
         <form
-          className="  w-md-100 w-lg-100 m-2 p-2 border rounded bg-dark text-white"
+          className="mx-auto w-md-100 w-lg-100 m-2 p-2 border rounded bg-dark text-white"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >

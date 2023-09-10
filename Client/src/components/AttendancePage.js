@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
+import Image from "../image/340434.png";
 const AttendancePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -73,7 +74,7 @@ const AttendancePage = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",

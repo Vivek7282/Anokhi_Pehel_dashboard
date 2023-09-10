@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
-
+import Image from "../image/340434.png";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -16,7 +16,7 @@ const ScorePage = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
-
+  const ImageUrl = "";
   const handlePasswordChange = async () => {
     try {
       // Check if new password and confirm password match
@@ -68,10 +68,11 @@ const ScorePage = () => {
     }
   }, [userId]);
   console.log("Mentor Data:", user);
+
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
@@ -87,8 +88,11 @@ const ScorePage = () => {
       <div className="mentor-profile">
         {user ? (
           <div className="mentor-card">
-            <img src={profile} className="mentor-photo" />
-
+            <img
+              src={`http://localhost:5000/images/${user[0].photo}`}
+              //   alt={(src = { profile })}
+              className="mentor-photo"
+            />
             <div className="mentor-details">
               <h2>{user[0].name}</h2>
               <p>

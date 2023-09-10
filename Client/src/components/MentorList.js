@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // Import the autotable plugin
-
+import Image from "../image/340434.png";
 const MentorList = () => {
   const [users, setUsers] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -56,7 +56,7 @@ const MentorList = () => {
     <div
       className="bg-image"
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
@@ -98,6 +98,7 @@ const MentorList = () => {
                 <th>Regnumber</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Profile</th>
               </tr>
             </thead>
             <tbody>
@@ -107,6 +108,15 @@ const MentorList = () => {
                   <td>{user.regnumber}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
+                  <td>
+                    <Link
+                      //  navigate(`/attendance?class=${selectedClass}`);
+                      to={`/mentorprofile?user._id=${user._id}`}
+                      className="btn btn-primary"
+                    >
+                      View Profile
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

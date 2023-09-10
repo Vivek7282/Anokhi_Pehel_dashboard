@@ -14,17 +14,26 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
   useEffect(() => {
     // Fetch userId from local storage
     const storedUserEmail = localStorage.getItem("userEmail");
 
     setUserEmail(storedUserEmail);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false);
+
+    navigate("/");
+  };
+
   return (
     <div
       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
@@ -90,6 +99,10 @@ const Sidebar = () => {
             >
               <CDBSidebarMenuItem icon="circle">Profile</CDBSidebarMenuItem>
             </NavLink>
+
+            <CDBSidebarMenuItem icon="table" onClick={handleLogout}>
+              Logout
+            </CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

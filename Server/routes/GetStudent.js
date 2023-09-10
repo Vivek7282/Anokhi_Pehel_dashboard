@@ -93,6 +93,26 @@ router.post("/getStudentNames", async (req, res) => {
   }
 });
 
+router.get("/getstudentByUserId", async (req, res) => {
+  // Extract the user ID from the request query parameters
+  const student_id = req.query.studentid;
+
+  try {
+    // Query the database to retrieve the user based on the ID
+    const student = await Student.findById(student_id);
+    console.log(student);
+    // Check if the user exists
+    if (!student) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(student);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.get("/getmentorsByUserId", async (req, res) => {
   // Extract the user ID from the request query parameters
   const user_id = req.query.userid;

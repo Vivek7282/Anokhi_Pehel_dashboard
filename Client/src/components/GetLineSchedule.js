@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
 import Footer from "./Footer";
+import Image from "../image/340434.png";
 const LinescheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
@@ -68,7 +69,7 @@ const LinescheduleTable = () => {
     <div
       className="bg-image"
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",

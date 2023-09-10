@@ -3,6 +3,7 @@ import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import Image from "../image/340434.png";
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
@@ -70,7 +71,7 @@ export default function Login() {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",

@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
-
+import Image from "../image/340434.png";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -73,7 +73,7 @@ const ScorePage = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
@@ -89,7 +89,10 @@ const ScorePage = () => {
       <div className="mentor-profile">
         {mentor ? (
           <div className="mentor-card">
-            <img src={profile} className="mentor-photo" />
+            <img
+              src={`http://localhost:5000/images/${mentor.photo}`}
+              className="mentor-photo"
+            />
 
             <div className="mentor-details">
               <h3>{mentor.name}</h3>

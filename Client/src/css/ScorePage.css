@@ -6,15 +6,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: rgb(7, 6, 6);
 }
 
 .mentor-profile {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
+  background-color: hwb(
+    165 1% 84% / 0.2
   ); /* Semi-transparent white background */
   padding: 20px;
   border-radius: 10px;
@@ -43,7 +40,7 @@
   font-size: 16px;
   margin-top: 10px;
   font-weight: bold;
-  color: chartreuse;
+  color: rgb(4, 0, 255);
 
   padding: 2px 4px; /* Add padding to create a highlight effect */
   border-radius: 3px; /* Add border-radius for rounded corners */
@@ -62,13 +59,17 @@
   border: 1px solid #ccc;
   padding: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #f9f9f9;
 }
 
 .schedule-title {
   text-align: center;
   font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
+
 .welcomecard {
   width: 400px;
   height: 400px;
@@ -77,8 +78,8 @@
   top: 50%;
   left: 40%;
   transform: translate(-50%, -50%);
-  background-color: #111213;
-  color: white;
+  background-color: #6dcfcc;
+  color: rgb(13, 8, 8);
   padding: 20px;
   margin: 10px;
   border-radius: 8px;

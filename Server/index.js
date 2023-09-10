@@ -8,6 +8,7 @@ mongoDB();
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.use("/images", express.static("images"));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(

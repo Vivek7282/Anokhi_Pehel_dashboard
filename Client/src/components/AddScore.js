@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
-
+import Image from "../image/340434.png";
 const AddScore = () => {
   const [selectedClass, setSelectedClass] = useState(""); // State to store the selected class
   const navigate = useNavigate(); // Initialize the navigate function here
@@ -17,7 +17,7 @@ const AddScore = () => {
     <div
       className="bg-image"
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",

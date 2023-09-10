@@ -1,11 +1,10 @@
-// AttendancePage.js
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-
-
+import { useNavigate } from "react-router-dom";
+import Image from "../image/340434.png";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -13,7 +12,8 @@ const ScorePage = () => {
 
   const [students, setStudents] = useState([]);
   const [scoreData, setScoreData] = useState({});
-
+  const [errors, setErrors] = useState({}); // State to manage validation errors
+  const [subject, setSubject] = useState("");
   // Fetch the list of students for the selected class based on the `classId`
   useEffect(() => {
     if (classId) {
@@ -24,7 +24,7 @@ const ScorePage = () => {
           // Initialize the attendanceData object with default values
           const initialData = {};
           response.data.forEach((student) => {
-            initialData[student._id] = -1; // Default value is -1
+            initialData[student._id] = 0; // Default value is -1
           });
           setScoreData(initialData);
         })
@@ -40,11 +40,31 @@ const ScorePage = () => {
         ...prevData,
         [studentId]: score,
       }));
+      // Clear the error message if the input is valid
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [studentId]: "",
+      }));
+    } else {
+      // Display an error message for invalid input
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [studentId]: "Invalid score. Please enter a value between 0 and 100.",
+      }));
     }
   };
-
+  const handleSubjectChange = (subject) => {
+    setSubject(subject);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Check for validation errors before submitting
+    const hasErrors = Object.values(errors).some((error) => error !== "");
+    if (hasErrors) {
+      // Handle validation errors
+      return;
+    }
 
     // Prepare the attendance data to be sent to the server
     const scoreRecords = Object.entries(scoreData).map(
@@ -57,15 +77,20 @@ const ScorePage = () => {
     // Create an object with all the data to be sent to the server
     const scoreSubmission = {
       classId: classId,
-      date: new Date().toISOString(), // You can adjust the date format as needed
-      scoreRecords,
+      subject: subject,
+      date: new Date().toISOString(),
+      scores: scoreRecords, // Use "scores" as the property name
     };
 
     // Send the attendance data to the server using Axios
     axios
       .post("http://localhost:5000/api6/submitscore", scoreSubmission)
       .then((response) => {
-        console.log(response.data);
+        if (response.data) {
+          console.log(response.data);
+          const navigate = useNavigate();
+          navigate("/dashboard");
+        }
         // Handle the response from the server as needed
       })
       .catch((error) => {
@@ -76,7 +101,7 @@ const ScorePage = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
@@ -89,8 +114,20 @@ const ScorePage = () => {
     >
       <Header />
       <h2>Students List for {classId}</h2>
+      <div className="mb-3">
+        <label htmlFor="subject" className="form-label text-white">
+          Subject:
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          name="subject"
+          value={subject}
+          onChange={(e) => handleSubjectChange(e.target.value)}
+        />
+      </div>
       <form
-        className="  w-md-100 w-lg-100 m-2 p-2 border rounded bg-dark text-white"
+        className="w-md-100 w-lg-100 m-2 p-2 border rounded bg-dark text-white"
         onSubmit={handleSubmit}
       >
         <table className="table table-bordered">
@@ -106,14 +143,14 @@ const ScorePage = () => {
                 <td>{student.name}</td>
                 <td>
                   <input
-                    type="number"
-                    min={-1}
-                    max={100}
-                    value={scoreData[student._id]}
+                    type="number" // Use type="number" for numeric input
+                    className="form-control"
+                    value={scoreData[student._id].toString()} // Assuming scoreData[student._id] is a number
                     onChange={(e) =>
                       handleScoreChange(student._id, parseInt(e.target.value))
                     }
                   />
+                  <div className="text-danger">{errors[student._id]}</div>
                 </td>
               </tr>
             ))}

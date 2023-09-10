@@ -3,7 +3,7 @@ import axios from "axios";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import "../css/Addschedule.css";
-
+import Image from "../image/340434.png";
 export default function AddSchedule() {
   const [userNames, setUserNames] = useState([]);
   const daysOfWeek = [
@@ -74,7 +74,7 @@ export default function AddSchedule() {
   return (
     <div
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",

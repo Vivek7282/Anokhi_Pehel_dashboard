@@ -6,8 +6,8 @@ const Test = require("../models/TestScore"); // Import your Mongoose model
 // Endpoint to submit scores
 router.post("/submitscore", async (req, res) => {
   try {
-    const { classId, date, scores } = req.body;
-
+    const { classId, subject, date, scores } = req.body;
+    console.log(scores);
     // Validate that classId is provided
     if (!classId) {
       return res.status(400).json({ error: "classId is required" });
@@ -26,29 +26,46 @@ router.post("/submitscore", async (req, res) => {
       }
     }
 
-    // Create an array to store the updated scores
-    const updatedScores = scores.map((score) => ({
-      studentId: score.studentId,
-      score: score.score,
-    }));
-    const currentDateTime = new Date();
-    const currentDate = new Date(
-      currentDateTime.getFullYear(),
-      currentDateTime.getMonth(),
-      currentDateTime.getDate()
-    );
+    // Check if a record with the same subject and date already exists
+    const incomingDate = new Date(date);
+    incomingDate.setHours(0, 0, 0, 0);
 
-    // Create a new test record
-    const newTest = new Test({
+    // Check if a record with the same subject and date already exists
+    const existingTest = await Test.findOne({
       classId,
-      date: currentDate.toISOString(),
-      score: updatedScores,
+      subject,
+      date: incomingDate, // Compare based on date only
     });
 
-    // Save the new test record to the database
-    await newTest.save();
+    // console.log(existingTest);
+    if (existingTest) {
+      // If a record exists, you can choose to update it or return an error
+      // For example, you can update the existing record with new scores
+      existingTest.score = scores;
+      await existingTest.save();
 
-    res.json({ message: "Scores submitted successfully" });
+      res.json({ message: "Scores updated successfully" });
+    } else {
+      // If no record exists, create a new test record
+      const currentDateTime = new Date();
+      const currentDate = new Date(
+        currentDateTime.getFullYear(),
+        currentDateTime.getMonth(),
+        currentDateTime.getDate()
+      );
+
+      const newTest = new Test({
+        classId,
+        subject,
+        date: currentDate.toISOString(),
+        score: scores,
+      });
+
+      // Save the new test record to the database
+      await newTest.save();
+
+      res.json({ message: "Scores submitted successfully" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -22,6 +22,8 @@ import EditProfile from "./components/EditProfile";
 import AntyodayaRegistration from "./Events/AntyodayaRegistration";
 import RemoveStudent from "./Remove/RemoveStudent";
 import RemoveMentor from "./Remove/RemoveMentor";
+import Logout from "./Logout/Logout";
+import StudentProfile from "./components/StudentProfile";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
           <Route path="/addscore" element={<AddScore />} />
           <Route path="/score" element={<ScorePage />} />
           <Route path="/mentorprofile" element={<MentorProfile />} />
+          <Route path="/studentprofile" element={<StudentProfile />} />
 
           <Route path="/attendancerecord" element={<AttendanceTable />} />
           <Route
@@ -60,6 +63,7 @@ function App() {
             path="/antyodayareg"
             element={<AntyodayaRegistration />}
           />
+          <Route exact path="/logout" element={<Logout />} />
           {/* <Route exact path="/class/:class" component={StudentList} /> */}
         </Routes>
       </div>

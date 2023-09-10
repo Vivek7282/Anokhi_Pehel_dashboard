@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-
+import Image from "../image/340434.png";
 const AttendanceTable = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [filterDate, setFilterDate] = useState(null); // Use null as initial state
@@ -66,7 +66,7 @@ const AttendanceTable = () => {
     <div
       className="bg-image"
       style={{
-        backgroundImage: `url(${myImage})`,
+        backgroundImage: `url(${Image})`,
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
