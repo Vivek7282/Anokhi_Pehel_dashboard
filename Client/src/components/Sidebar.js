@@ -72,6 +72,11 @@ const Sidebar = () => {
                 Add Scorecard
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/viewscore" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Class Performance
+              </CDBSidebarMenuItem>
+            </NavLink>
 
             <NavLink exact to="/getschedule" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">

@@ -86,14 +86,17 @@ const ScorePage = () => {
     // Send the attendance data to the server using Axios
     axios
       .post("http://localhost:5000/api6/submitscore", scoreSubmission)
-      .then((response) => {
-        if (response) {
-          console.log(response.data);
-          setTimeout(() => {
-            alert("Score submitted successfully");
-            const navigate = useNavigate();
-            navigate("/dashboard");
-          }, 10); // Delay for 10 milliseconds before showing the alert
+
+      .then((res) => {
+        if (res.data === "Added") {
+          console.log(res.data);
+          alert("Score submitted successfully");
+          const navigate = useNavigate();
+          navigate("/dashboard");
+          setScoreData({
+            subject: "",
+            score: "",
+          });
         }
         // Handle the response from the server as needed
       })
@@ -114,6 +117,8 @@ const ScorePage = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+
+        // minHeight: "100vh", // Make it full viewport height
       }}
     >
       <Header />
@@ -122,13 +127,28 @@ const ScorePage = () => {
         <label htmlFor="subject" className="form-label text-white">
           Subject:
         </label>
-        <input
-          type="text"
-          className="form-control"
+
+        <select
+          className="form-select"
           name="subject"
           value={subject}
           onChange={(e) => handleSubjectChange(e.target.value)}
-        />
+        >
+          <option value="">Select a Subject</option>
+          <option value="All SUbject">All Subject</option>
+          <option value="Maths"> Maths</option>
+          <option value="Science">Science</option>
+          <option value="Hindi">Hindi</option>
+          <option value="English">English</option>
+          <option value="Physics">Physics</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Biology">Biology</option>
+          <option value="Reasoning">Reasoning</option>
+          <option value="Social Science">Social Science</option>
+          <option value="GK">GK</option>
+
+          {/* Add more class options as needed */}
+        </select>
       </div>
       <form
         className="w-md-100 w-lg-100 m-2 p-2 border rounded bg-dark text-white"

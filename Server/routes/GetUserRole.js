@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 router.get("/getUserRoleByEmail", async (req, res) => {
   try {
     const { email } = req.query; // You can use req.body.email if sending in the request body
-    console.log("vivek", email);
+
     // Fetch the user's role based on the email from your database
     const userRole = await getUserRoleByEmail(email);
 

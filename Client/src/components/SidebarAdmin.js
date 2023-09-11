@@ -61,12 +61,18 @@ const SidebarAdmin = () => {
                 Attendance Record
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/viewscore" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Class Performance
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/mentors" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Mentors List</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/adduser" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Mentor</CDBSidebarMenuItem>
             </NavLink>
+
             <NavLink exact to="/removementor" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Remove Mentor</CDBSidebarMenuItem>
             </NavLink>

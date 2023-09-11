@@ -25,7 +25,7 @@ const AddScore = () => {
       }}
     >
       <Header />
-      <h2 className="text-center text-white">Take Attendance</h2>
+      <h2 className="text-center text-white">Select The Class</h2>
       <div className="container mt-5 d-flex align-items-center justify-content-center">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

@@ -12,6 +12,7 @@ const ScorePage = () => {
   const searchParams = new URLSearchParams(location.search);
   const studentId = searchParams.get("student._id");
   const [student, setStudent] = useState(null); // Store mentor data in a single variable
+  const [marks, setMarks] = useState([]); // Store class schedule data
   console.log(studentId);
   useEffect(() => {
     if (studentId) {
@@ -25,6 +26,18 @@ const ScorePage = () => {
         })
         .catch((err) => {
           console.error("Error fetching mentor: ", err);
+        });
+
+      axios
+        .get(
+          `http://localhost:5000/api6/getMarksByUserId?studentid=${studentId}`
+        )
+        .then((res1) => {
+          //   console.log("Fetched class schedule data:", res1.data); // Log fetched data
+          setMarks(res1.data);
+        })
+        .catch((err) => {
+          console.error("Error fetching class schedule: ", err);
         });
     }
   }, [studentId]);
@@ -79,6 +92,36 @@ const ScorePage = () => {
                 <span className="highlight-text">Address:</span>{" "}
                 <span className="custom-color">{student.address}</span>
               </p>
+            </div>
+
+            <div className="class-schedule-container">
+              <h2 className="schedule-title">Marks Record</h2>
+              <div className="class-schedule">
+                <ul>
+                  {marks && marks.length > 0 ? (
+                    marks.map((mark, index) => {
+                      const studentMarks = mark.score.find(
+                        (score) => score.studentId === studentId
+                      );
+
+                      if (studentMarks) {
+                        const date = new Date(mark.date).toLocaleDateString(); // Format date
+
+                        return (
+                          <li key={index}>
+                            <strong>Date:</strong> {date} -{" "}
+                            <strong>Subject:</strong> {mark.subject} -{" "}
+                            <strong>Marks:</strong> {studentMarks.score}
+                          </li>
+                        );
+                      }
+                      return null;
+                    })
+                  ) : (
+                    <li>No Marks Record found.</li>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
         ) : (

@@ -255,8 +255,8 @@ export default function AddStudents() {
               type="file"
               className="form-control"
               name="photo"
-              accept=".png, .jpg, .jpeg"
-              capture="camera" // Specify 'camera' to use the device's camera
+              accept=".png, .jpg, .jpeg,capture=camera"
+              // Specify 'camera' to use the device's camera
               onChange={onPhotoChange}
             />
           </div>

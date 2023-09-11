@@ -24,6 +24,8 @@ import RemoveStudent from "./Remove/RemoveStudent";
 import RemoveMentor from "./Remove/RemoveMentor";
 import Logout from "./Logout/Logout";
 import StudentProfile from "./components/StudentProfile";
+
+import ViewScorePage from "./components/ViewScorePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/addscore" element={<AddScore />} />
           <Route path="/score" element={<ScorePage />} />
+          <Route path="/viewscore" element={<ViewScorePage />} />
+          <Route path="/viewscorepage" element={<ViewScorePage />} />
           <Route path="/mentorprofile" element={<MentorProfile />} />
           <Route path="/studentprofile" element={<StudentProfile />} />
 

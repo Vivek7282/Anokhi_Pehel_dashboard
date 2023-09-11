@@ -63,8 +63,27 @@ router.post("/submitscore", async (req, res) => {
 
       // Save the new test record to the database
       await newTest.save();
+      res.json("Added");
+      //   res.json({ message: "Scores submitted successfully" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+// getMarksByUserId?studentid=${studentId}
+router.get("/getMarksByUserId", async (req, res) => {
+  try {
+    const studentId = req.query.studentid;
+    // console.log(studentId);
+    const marks = await Test.find({ "score.studentId": studentId });
+    // console.log(marks);
 
-      res.json({ message: "Scores submitted successfully" });
+    if (marks && marks.length > 0) {
+      res.json(marks);
+    } else {
+      console.log("Data not found");
+      res.json({ message: "Data not found" });
     }
   } catch (error) {
     console.error(error);

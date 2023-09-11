@@ -100,7 +100,7 @@ router.get("/getstudentByUserId", async (req, res) => {
   try {
     // Query the database to retrieve the user based on the ID
     const student = await Student.findById(student_id);
-    console.log(student);
+    // console.log(student);
     // Check if the user exists
     if (!student) {
       return res.status(404).json({ error: "User not found" });

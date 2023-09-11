@@ -177,7 +177,7 @@ export default function Signup() {
               type="file"
               className="form-control"
               name="photo"
-              accept=".png, .jpg, .jpeg"
+              accept=".png, .jpg, .jpeg,capture=camera"
               //   value={credentials.photo}
               onChange={onPhotoChange}
             />
