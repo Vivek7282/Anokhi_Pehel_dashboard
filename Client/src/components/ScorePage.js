@@ -3,8 +3,9 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-import { useNavigate } from "react-router-dom";
+
 import Image from "../image/340434.png";
+import { useNavigate } from "react-router-dom";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -86,10 +87,13 @@ const ScorePage = () => {
     axios
       .post("http://localhost:5000/api6/submitscore", scoreSubmission)
       .then((response) => {
-        if (response.data) {
+        if (response) {
           console.log(response.data);
-          const navigate = useNavigate();
-          navigate("/dashboard");
+          setTimeout(() => {
+            alert("Score submitted successfully");
+            const navigate = useNavigate();
+            navigate("/dashboard");
+          }, 10); // Delay for 10 milliseconds before showing the alert
         }
         // Handle the response from the server as needed
       })
