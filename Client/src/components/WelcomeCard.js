@@ -4,6 +4,8 @@ import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/ScorePage.css";
+import { Link } from "react-router-dom";
+
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
 import Image from "../image/340434.png";
@@ -32,6 +34,9 @@ const WelcomeCard = ({ userEmail }) => {
     <div className="welcome-card">
       <h3>Welcome Back</h3>
       {user ? <p>{user[0].name}</p> : <p>No mentor data available.</p>}
+      <Link to="/getclasslist" className="btn btn-primary">
+        Today's Class
+      </Link>
     </div>
   );
 };

@@ -33,6 +33,8 @@ app.use("/api7", require("./routes/AddLineSchedule"));
 app.use("/api8", require("./routes/GetMentorByEmail"));
 app.use("/api9", require("./routes/ChangePassword"));
 app.use("/api10", require("./routes/RemoveMentor"));
+app.use("/api13", require("./routes/GetMentorById"));
+app.use("/api14", require("./routes/AddTopic"));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

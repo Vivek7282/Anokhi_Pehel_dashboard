@@ -15,9 +15,9 @@
 
 /* Style the logo image */
 .logo {
-  max-width: 100px; /* Adjust the max width as needed */
+  max-width: 150px; /* Adjust the max width as needed */
   margin-top: 0px;
-  height: auto;
+  height: 100px;
 }
 
 /* Style the header text */

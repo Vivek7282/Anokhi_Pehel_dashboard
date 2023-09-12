@@ -77,6 +77,11 @@ const Sidebar = () => {
                 Class Performance
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/viewtopic" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Topic Covered
+              </CDBSidebarMenuItem>
+            </NavLink>
 
             <NavLink exact to="/getschedule" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">

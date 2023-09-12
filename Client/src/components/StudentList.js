@@ -157,7 +157,7 @@ const StudentList = () => {
                   <td>{student.school}</td>
                   <td>
                     <Link
-                      //  navigate(`/attendance?class=${selectedClass}`);
+                      
                       to={`/studentprofile?student._id=${student._id}`}
                       className="btn btn-primary"
                     >

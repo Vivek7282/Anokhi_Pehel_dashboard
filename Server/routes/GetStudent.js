@@ -116,7 +116,7 @@ router.get("/getstudentByUserId", async (req, res) => {
 router.get("/getmentorsByUserId", async (req, res) => {
   // Extract the user ID from the request query parameters
   const user_id = req.query.userid;
-
+  // console.log(user_id);
   try {
     // Query the database to retrieve the user based on the ID
     const user = await User.findById(user_id);

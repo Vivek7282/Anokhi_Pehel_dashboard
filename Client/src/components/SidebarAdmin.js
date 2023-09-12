@@ -18,12 +18,19 @@ import { NavLink } from "react-router-dom";
 const SidebarAdmin = () => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
   useEffect(() => {
     // Fetch userId from local storage
     const storedUserEmail = localStorage.getItem("userEmail");
 
     setUserEmail(storedUserEmail);
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false);
+
+    navigate("/");
+  };
   return (
     <div
       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
@@ -72,6 +79,11 @@ const SidebarAdmin = () => {
             <NavLink exact to="/adduser" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Add Mentor</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/viewtopic" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Topic Covered
+              </CDBSidebarMenuItem>
+            </NavLink>
 
             <NavLink exact to="/removementor" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Remove Mentor</CDBSidebarMenuItem>
@@ -115,6 +127,10 @@ const SidebarAdmin = () => {
             >
               <CDBSidebarMenuItem icon="circle">Profile</CDBSidebarMenuItem>
             </NavLink>
+
+            <CDBSidebarMenuItem icon="table" onClick={handleLogout}>
+              Logout
+            </CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

@@ -24,8 +24,10 @@ import RemoveStudent from "./Remove/RemoveStudent";
 import RemoveMentor from "./Remove/RemoveMentor";
 import Logout from "./Logout/Logout";
 import StudentProfile from "./components/StudentProfile";
-
+import GetClasslist from "./Today'sClass/GetClasslist";
 import ViewScorePage from "./components/ViewScorePage";
+import ViewTopic from "./Today'sClass/ViewTopic";
+import ClassTopic from "./Today'sClass/ClassTopic";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -46,7 +48,9 @@ function App() {
           <Route path="/viewscorepage" element={<ViewScorePage />} />
           <Route path="/mentorprofile" element={<MentorProfile />} />
           <Route path="/studentprofile" element={<StudentProfile />} />
-
+          <Route path="/getclasslist" element={<GetClasslist />} />
+          <Route path="/classtopic" element={<ClassTopic />} />
+          <Route path="/viewtopic" element={<ViewTopic />} />
           <Route path="/attendancerecord" element={<AttendanceTable />} />
           <Route
             exact

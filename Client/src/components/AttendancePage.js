@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
+import Footer from "./Footer";
 import myImage from "../image/backgroundImage.jpeg";
 import Image from "../image/340434.png";
 const AttendancePage = () => {
@@ -64,6 +65,7 @@ const AttendancePage = () => {
       .post("http://localhost:5000/api4/submitAttendance", attendanceSubmission)
       .then((response) => {
         console.log(response.data);
+        alert("Attendance Saved");
         // Handle the response from the server as needed
       })
       .catch((error) => {
@@ -78,7 +80,7 @@ const AttendancePage = () => {
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
-        minHeight: "50vh",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -121,6 +123,7 @@ const AttendancePage = () => {
           Submit Attendance
         </button>
       </form>
+      <Footer />
     </div>
   );
 };

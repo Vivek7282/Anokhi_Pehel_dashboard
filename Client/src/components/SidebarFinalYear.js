@@ -18,12 +18,19 @@ import { NavLink } from "react-router-dom";
 const SidebarAdmin = () => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
   useEffect(() => {
     // Fetch userId from local storage
     const storedUserEmail = localStorage.getItem("userEmail");
 
     setUserEmail(storedUserEmail);
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedin(false);
+
+    navigate("/");
+  };
   return (
     <div
       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
@@ -60,6 +67,11 @@ const SidebarAdmin = () => {
                 Attendance Record
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/viewtopic" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Topic Covered
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/viewscore" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">
                 Class Performance
@@ -79,6 +91,7 @@ const SidebarAdmin = () => {
                 Line Schedule
               </CDBSidebarMenuItem>
             </NavLink>
+
             <NavLink
               exact
               to={`/editprofile?userEmail=${userEmail}`}
@@ -86,6 +99,9 @@ const SidebarAdmin = () => {
             >
               <CDBSidebarMenuItem icon="circle">Profile</CDBSidebarMenuItem>
             </NavLink>
+            <CDBSidebarMenuItem icon="table" onClick={handleLogout}>
+              Logout
+            </CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
