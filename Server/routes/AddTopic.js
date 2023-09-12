@@ -19,25 +19,9 @@ router.post("/addTopicCovered", async (req, res) => {
       return res.status(400).json({ error: "Missing required data" });
     }
 
-    // Extract the date portion from the input date
-    const inputDate = new Date(date);
-    const startDate = new Date(
-      inputDate.getFullYear(),
-      inputDate.getMonth(),
-      inputDate.getDate()
-    );
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 1); // Add 1 day to create the end date
-
-    // Check if a topic with the same date already exists
-    const existingTopic = await Topic.findOne({
-      classId,
-      date: {
-        $gte: startDate,
-        $lt: endDate,
-      },
-    });
-
+    // Check if a topic with the same date and class already exists
+    const existingTopic = await Topic.findOne({ classId, date });
+    console.log(existingTopic);
     if (existingTopic) {
       // If it exists, update the topic details
       existingTopic.subject = subject;
@@ -64,6 +48,16 @@ router.post("/addTopicCovered", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/topic", async (req, res) => {
+  try {
+    const topics = await Topic.find(); // Retrieve all topics from the database
+    res.json(topics); // Send the topics as a JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
