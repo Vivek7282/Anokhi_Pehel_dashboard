@@ -7,7 +7,12 @@ import myImage4 from "../image/LOGO (1).png";
 const Header = () => {
   return (
     <div className="header-container">
-      <img src={myImage4} alt="Logo" className="logo" />
+      <img
+        src={myImage4}
+        alt="Logo"
+        className="logo"
+        style={{ width: "150px", height: "150px" }}
+      />
       <h1 className="header-text">Anokhi Pehel</h1>
     </div>
   );

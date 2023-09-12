@@ -92,7 +92,7 @@ const TestScoreTable = () => {
           <div className="col-md-6 col-lg-4 mb-3">
             <label className="text-white">Filter by Class:</label>
             <select
-              className="form-control"
+              className="form-select"
               value={filterClass}
               onChange={(e) => setFilterClass(e.target.value)}
             >

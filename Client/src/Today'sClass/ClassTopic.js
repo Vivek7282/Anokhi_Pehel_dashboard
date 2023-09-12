@@ -96,7 +96,11 @@ const TopicsCoveredPage = () => {
       .post("http://localhost:5000/api14/addTopicCovered", topicSubmission)
       .then((response) => {
         console.log(response.data);
-        alert("Topic Covered Saved");
+        if (response.data === "Added") {
+          alert("Topic Covered Saved");
+        } else {
+          alert("Topic Covered Updated");
+        }
         setNewTopic(""); // Clear the input field after submission
         // Handle the response from the server as needed
       })

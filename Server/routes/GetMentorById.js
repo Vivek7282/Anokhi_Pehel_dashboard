@@ -20,7 +20,7 @@ router.get("/getTeachersByClass", async (req, res) => {
   try {
     // Query the database to retrieve the user based on the ID
     const mentor = await Schedule.find({ className: classId });
-    console.log(mentor);
+    // console.log(mentor);
     // Check if the user exists
     if (!mentor) {
       return res.status(404).json({ error: "mentor not found" });

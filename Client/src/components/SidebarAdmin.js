@@ -111,6 +111,11 @@ const SidebarAdmin = () => {
                 Schedule
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/editclass" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">
+                Edit Class Schedule
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink
               exact
               to="/getlineschedule"

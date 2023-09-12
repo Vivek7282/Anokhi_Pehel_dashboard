@@ -244,7 +244,7 @@ router.get("/getLineSchedule1ByMentorId", async (req, res) => {
 });
 router.delete("/removementor/:mentorId", async (req, res) => {
   const mentorId = req.params.mentorId;
-  console.log("Vivek:- ", mentorId);
+  // console.log("Vivek:- ", mentorId);
   try {
     // Find and remove the mentor by ID from the database
     const removedMentor = await User.findByIdAndRemove(mentorId);

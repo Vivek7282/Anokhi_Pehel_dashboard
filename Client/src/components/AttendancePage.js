@@ -65,7 +65,11 @@ const AttendancePage = () => {
       .post("http://localhost:5000/api4/submitAttendance", attendanceSubmission)
       .then((response) => {
         console.log(response.data);
-        alert("Attendance Saved");
+        if (response.data === "Attendance submitted successfully") {
+          alert("Attendance Saved");
+        } else if (response.data === "Attendance updated successfully") {
+          alert("Attendance Updated");
+        }
         // Handle the response from the server as needed
       })
       .catch((error) => {

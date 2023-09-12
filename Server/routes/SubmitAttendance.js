@@ -23,9 +23,12 @@ router.post("/submitAttendance", async (req, res) => {
 
     // If there are existing records, deny entry
     if (existingAttendance) {
-      return res
-        .status(400)
-        .json({ error: "Attendance for this date and class already exists" });
+      // Attendance for this date and class already exists; update it
+      existingAttendance.attendanceRecords = attendanceRecords;
+
+      await existingAttendance.save();
+
+      return res.json("Attendance updated successfully");
     }
 
     // Create an array to store the updated records
@@ -44,7 +47,7 @@ router.post("/submitAttendance", async (req, res) => {
     // Save the new attendance record to the database
     await newAttendance.save();
 
-    res.json({ message: "Attendance submitted successfully" });
+    res.json("Attendance submitted successfully");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

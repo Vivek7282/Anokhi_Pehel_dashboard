@@ -28,6 +28,8 @@ import GetClasslist from "./Today'sClass/GetClasslist";
 import ViewScorePage from "./components/ViewScorePage";
 import ViewTopic from "./Today'sClass/ViewTopic";
 import ClassTopic from "./Today'sClass/ClassTopic";
+import Contact from "./Contact/Contact";
+import EditClass from "./Edit/EditClass";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
           <Route path="/getclasslist" element={<GetClasslist />} />
           <Route path="/classtopic" element={<ClassTopic />} />
           <Route path="/viewtopic" element={<ViewTopic />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/editclass" element={<EditClass />} />
           <Route path="/attendancerecord" element={<AttendanceTable />} />
           <Route
             exact

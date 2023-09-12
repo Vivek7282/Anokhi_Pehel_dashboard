@@ -19,34 +19,51 @@ router.post("/addTopicCovered", async (req, res) => {
       return res.status(400).json({ error: "Missing required data" });
     }
 
-    // Create a new topic object and add it to the list
-    const newTopic = new Topic({
+    // Extract the date portion from the input date
+    const inputDate = new Date(date);
+    const startDate = new Date(
+      inputDate.getFullYear(),
+      inputDate.getMonth(),
+      inputDate.getDate()
+    );
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 1); // Add 1 day to create the end date
+
+    // Check if a topic with the same date already exists
+    const existingTopic = await Topic.findOne({
       classId,
-      date,
-      subject,
-      mentorId,
-      topic,
+      date: {
+        $gte: startDate,
+        $lt: endDate,
+      },
     });
 
-    await newTopic.save();
-    //   Topic.push(newTopic);
+    if (existingTopic) {
+      // If it exists, update the topic details
+      existingTopic.subject = subject;
+      existingTopic.mentorId = mentorId;
+      existingTopic.topic = topic;
 
-    // Respond with a success message (you can customize the response)
-    res.json("Added");
-    //   res.json({ message: "Scores submitted successfully" });
+      await existingTopic.save();
+
+      return res.json("Updated");
+    } else {
+      // If it doesn't exist, create a new topic object and add it to the list
+      const newTopic = new Topic({
+        classId,
+        date,
+        subject,
+        mentorId,
+        topic,
+      });
+
+      await newTopic.save();
+
+      return res.json("Added");
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-router.get("/topic", async (req, res) => {
-  try {
-    const topics = await Topic.find(); // Retrieve all topics from the database
-    res.json(topics); // Send the topics as a JSON response
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
   }
 });
 
