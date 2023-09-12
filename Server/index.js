@@ -26,7 +26,10 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/images", express.static("images"));
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "anokhi-pehel-dashboard.vercel.app"
+  );
   res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, DELETE" // Include DELETE here

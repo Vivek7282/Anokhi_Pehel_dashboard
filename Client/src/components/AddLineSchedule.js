@@ -28,7 +28,7 @@ export default function AddSchedule() {
   useEffect(() => {
     // Fetch mentor names when the component mounts
     axios
-      .get("http://localhost:5000/api2/mentors")
+      .get("anokhi-pehel-seven.vercel.app/api2/mentors")
       .then((res) => {
         setUserNames(res.data);
       })
