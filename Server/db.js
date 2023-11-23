@@ -9,11 +9,6 @@ const mongoDB = async () => {
       useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB...");
-    // const sampleCollection = await mongoose.connection.db.collection("Sample");
-    // const arr = await sampleCollection
-    //   .find({})
-    //   .toArray(function (err, data) {});
-    // console.log(arr);
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
   }

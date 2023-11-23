@@ -3,14 +3,14 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
-
+import { BASE_URL } from "../Service/helper";
 import Image from "../image/340434.png";
 import { useNavigate } from "react-router-dom";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const classId = searchParams.get("class");
-
+  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [scoreData, setScoreData] = useState({});
   const [errors, setErrors] = useState({}); // State to manage validation errors
@@ -19,7 +19,7 @@ const ScorePage = () => {
   useEffect(() => {
     if (classId) {
       axios
-        .get(`http://localhost:5000/api1/getStudentsByClass?class=${classId}`)
+        .get(`${BASE_URL}/api/getStudentsByClass?class=${classId}`)
         .then((response) => {
           setStudents(response.data);
           // Initialize the attendanceData object with default values
@@ -85,13 +85,13 @@ const ScorePage = () => {
 
     // Send the attendance data to the server using Axios
     axios
-      .post("http://localhost:5000/api6/submitscore", scoreSubmission)
+      .post(`${BASE_URL}/api/submitscore`, scoreSubmission)
 
       .then((res) => {
         if (res.data === "Added") {
           console.log(res.data);
           alert("Score submitted successfully");
-          const navigate = useNavigate();
+
           navigate("/dashboard");
           setScoreData({
             subject: "",

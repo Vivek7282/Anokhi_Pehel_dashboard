@@ -13,6 +13,7 @@ const fetch = require("../middleware/fetchdetails");
 const jwtSecret = "HaHa";
 const multer = require("multer");
 const app = express();
+const { getUserRoleByEmail } = require("../controller/userController");
 app.use(cors());
 
 const storage = multer.diskStorage({
@@ -126,7 +127,7 @@ router.post(
 
     const { email, password } = req.body;
     try {
-      let user = await User.findOne({ email }); //{email:email} === {email}
+      let user = await User.findOne({ email }).maxTimeMS(20000); //{email:email} === {email}
       if (!user) {
         return res
           .status(400)

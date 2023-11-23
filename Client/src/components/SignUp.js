@@ -4,6 +4,7 @@ import axios from "axios";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import Footer from "./Footer";
+import { BASE_URL } from "../Service/helper";
 export default function Signup() {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -28,7 +29,7 @@ export default function Signup() {
     formData.append("photo", credentials.photo);
 
     axios
-      .post("http://localhost:5000/api/createuser", formData)
+      .post(`${BASE_URL}/api/createuser`, formData)
       .then((res) => {
         console.log(res);
         // Check if the response indicates success (you should have a proper way to determine success)

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -14,7 +15,7 @@ const StudentList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api1/studentlist")
+      .get(`${BASE_URL}/api/studentlist`)
       .then((response) => {
         setStudents(response.data);
       })
@@ -157,7 +158,6 @@ const StudentList = () => {
                   <td>{student.school}</td>
                   <td>
                     <Link
-                      
                       to={`/studentprofile?student._id=${student._id}`}
                       className="btn btn-primary"
                     >

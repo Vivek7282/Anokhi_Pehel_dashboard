@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import Image from "../image/340434.png";
-
+import { BASE_URL } from "../Service/helper";
 const ScheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
@@ -11,10 +11,10 @@ const ScheduleTable = () => {
   const [mentorsInfo, setMentorsInfo] = useState({});
   const [editingSchedule, setEditingSchedule] = useState(null); // To track the schedule being edited
   const [editedScheduleData, setEditedScheduleData] = useState({}); // To store edited schedule data
-
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api3/getschedule")
+      .get(`${BASE_URL}/api/getschedule`)
       .then((response) => {
         setScheduleData(response.data);
       })
@@ -25,7 +25,7 @@ const ScheduleTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api2/mentors")
+      .get(`${BASE_URL}/api/mentors`)
       .then((response) => {
         const mentorData = {};
         response.data.forEach((mentor) => {
@@ -79,7 +79,7 @@ const ScheduleTable = () => {
     // Send a PUT request to update the schedule with edited data
     axios
       .put(
-        `http://localhost:5000/api3/updateschedule/${editingSchedule._id}`,
+        `${BASE_URL}/api3/updateschedule/${editingSchedule._id}`,
         editedScheduleData
       )
       .then((response) => {

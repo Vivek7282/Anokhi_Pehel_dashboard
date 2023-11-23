@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 
 const TestScoreTable = () => {
   const [testScores, setTestScores] = useState([]);
@@ -13,7 +14,7 @@ const TestScoreTable = () => {
   useEffect(() => {
     // Fetch test scores data when the component mounts
     axios
-      .get("http://localhost:5000/api5/getTestScores") // Update the API endpoint
+      .get(`${BASE_URL}/api/getTestScores`) // Update the API endpoint
       .then((response) => {
         setTestScores(response.data);
 
@@ -39,7 +40,7 @@ const TestScoreTable = () => {
 
     // Make an API call to fetch student names
     axios
-      .post("http://localhost:5000/api1/getStudentNames", {
+      .post(`${BASE_URL}/api/getStudentNames`, {
         studentIds: studentIdArray,
       })
       .then((response) => {

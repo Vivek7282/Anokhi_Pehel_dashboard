@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import Header from "./Header";
 import Image from "../image/340434.png";
-
+import { BASE_URL } from "../Service/helper";
 const ViewTopic = () => {
   const [topics, setTopics] = useState([]);
   const [filterSubject, setFilterSubject] = useState("");
@@ -15,7 +15,7 @@ const ViewTopic = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api14/topic")
+      .get(`${BASE_URL}/api/topic`)
       .then((response) => {
         setTopics(response.data);
         const mentorIds = Array.from(
@@ -52,7 +52,7 @@ const ViewTopic = () => {
   const fetchMentorNames = (mentorIds) => {
     const mentorNamePromises = mentorIds.map((mentorId) => {
       return axios
-        .get(`http://localhost:5000/api1/getmentorsByUserId?userid=${mentorId}`)
+        .get(`${BASE_URL}/api1/getmentorsByUserId?userid=${mentorId}`)
         .then((res) => {
           // Assuming the mentor's name is in res.data.name
           return { [mentorId]: res.data.name };

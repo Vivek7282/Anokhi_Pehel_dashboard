@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // Import the autotable plugin
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const MentorList = () => {
   const [users, setUsers] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -14,7 +15,7 @@ const MentorList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api1/mentorlist")
+      .get(`${BASE_URL}/api/mentorlist`)
       .then((response) => {
         setUsers(response.data);
       })

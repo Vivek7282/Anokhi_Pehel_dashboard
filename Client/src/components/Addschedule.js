@@ -4,6 +4,7 @@ import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
 import "../css/Addschedule.css";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 export default function AddSchedule() {
   const [userNames, setUserNames] = useState([]);
   const daysOfWeek = [
@@ -28,7 +29,7 @@ export default function AddSchedule() {
   useEffect(() => {
     // Fetch mentor names when the component mounts
     axios
-      .get("http://localhost:5000/api2/mentors")
+      .get(`${BASE_URL}/api/mentors`)
       .then((res) => {
         setUserNames(res.data);
       })
@@ -40,7 +41,7 @@ export default function AddSchedule() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api3/addschedule", schedule)
+      .post(`${BASE_URL}/api/addschedule`, schedule)
       .then((res) => {
         console.log(res);
         // Check if the response indicates success (you should have a proper way to determine success)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { BASE_URL } from "../Service/helper";
 function StudentsByClass({ match }) {
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState(""); // State to store the selected class
@@ -9,7 +9,7 @@ function StudentsByClass({ match }) {
     // Fetch students based on the selected class
     if (selectedClass) {
       // Make an HTTP request to fetch students by class
-      fetch(`http://localhost:5000/api/students/${selectedClass}`)
+      fetch(`${BASE_URL}/api/students/${selectedClass}`)
         .then((response) => response.json())
         .then((data) => {
           setStudents(data);

@@ -4,6 +4,7 @@ import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
 import Footer from "./Footer";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const LinescheduleTable = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [filterDay, setFilterDay] = useState("");
@@ -13,7 +14,7 @@ const LinescheduleTable = () => {
   useEffect(() => {
     // Fetch schedule data when the component mounts
     axios
-      .get("http://localhost:5000/api7/getlineschedule")
+      .get(`${BASE_URL}/api/getlineschedule`)
       .then((response) => {
         setScheduleData(response.data);
       })
@@ -25,7 +26,7 @@ const LinescheduleTable = () => {
   useEffect(() => {
     // Fetch user information when the component mounts
     axios
-      .get("http://localhost:5000/api2/mentors")
+      .get(`${BASE_URL}/api/mentors`)
       .then((response) => {
         // Convert the response data into a user information object
         const userDataObject = {};

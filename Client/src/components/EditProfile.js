@@ -7,6 +7,7 @@ import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -17,6 +18,7 @@ const ScorePage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
   const ImageUrl = "";
+
   const handlePasswordChange = async () => {
     try {
       // Check if new password and confirm password match
@@ -26,14 +28,11 @@ const ScorePage = () => {
       }
 
       // Send a request to the server to change the password
-      const response = await axios.post(
-        "http://localhost:5000/api9/changePassword",
-        {
-          userId,
-          currentPassword,
-          newPassword,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/api/changePassword`, {
+        userId,
+        currentPassword,
+        newPassword,
+      });
 
       if (response.data.success) {
         // Password changed successfully
@@ -58,7 +57,7 @@ const ScorePage = () => {
   useEffect(() => {
     if (userId) {
       axios
-        .get(`http://localhost:5000/api8/getmentorsByEmail?email=${userId}`)
+        .get(`${BASE_URL}/api/getmentorsByEmail?email=${userId}`)
         .then((res) => {
           setUser(res.data); // Assuming the response is an array, take the first item
         })
@@ -89,7 +88,7 @@ const ScorePage = () => {
         {user ? (
           <div className="mentor-card">
             <img
-              src={`http://localhost:5000/images/${user[0].photo}`}
+              src={`https://anokhi-pehel-backend.vercel.app/images/${user[0].photo}`}
               //   alt={(src = { profile })}
               className="mentor-photo"
             />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import myImage from "../image/backgroundImage.jpeg";
 import Header from "./Header";
-
+import { BASE_URL } from "../Service/helper";
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [filterName, setFilterName] = useState("");
@@ -11,7 +11,7 @@ const StudentList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api1/studentlist")
+      .get(`${BASE_URL}/api/studentlist`)
       .then((response) => {
         setStudents(response.data);
       })
@@ -39,9 +39,7 @@ const StudentList = () => {
   const handleDeleteStudent = async (studentId) => {
     try {
       // Send a request to delete the student by ID
-      await axios.delete(
-        `http://localhost:5000/api1/removestudent/${studentId}`
-      );
+      await axios.delete(`${BASE_URL}/api/removestudent/${studentId}`);
       // Remove the deleted student from the local state
       setStudents((prevStudents) =>
         prevStudents.filter((student) => student._id !== studentId)

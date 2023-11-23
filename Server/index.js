@@ -25,11 +25,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use("/images", express.static("images"));
+app.use(cors());
+
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "anokhi-pehel-dashboard.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, DELETE" // Include DELETE here
@@ -40,20 +39,39 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "https://anokhi-pehel.netlify.app");
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, PATCH, DELETE" // Include DELETE here
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+
 app.use(express.json());
 app.use("/api", require("./routes/Auth"));
-app.use("/api1", require("./routes/GetStudent"));
-app.use("/api2", require("./routes/GetUserRole"));
-app.use("/api3", require("./routes/Addschedule"));
-app.use("/api4", require("./routes/SubmitAttendance"));
-app.use("/api5", require("./routes/GetAttendance"));
-app.use("/api6", require("./routes/AddScore"));
-app.use("/api7", require("./routes/AddLineSchedule"));
-app.use("/api8", require("./routes/GetMentorByEmail"));
-app.use("/api9", require("./routes/ChangePassword"));
-app.use("/api10", require("./routes/RemoveMentor"));
-app.use("/api13", require("./routes/GetMentorById"));
-app.use("/api14", require("./routes/AddTopic"));
+app.use("/api", require("./routes/GetStudent"));
+app.use("/api", require("./routes/GetUserRole"));
+app.use("/api", require("./routes/Addschedule"));
+app.use("/api", require("./routes/SubmitAttendance"));
+app.use("/api", require("./routes/GetAttendance"));
+app.use("/api", require("./routes/AddScore"));
+app.use("/api", require("./routes/AddLineSchedule"));
+app.use("/api", require("./routes/GetMentorByEmail"));
+app.use("/api", require("./routes/ChangePassword"));
+app.use("/api", require("./routes/RemoveMentor"));
+app.use("/api", require("./routes/GetMentorById"));
+app.use("/api", require("./routes/AddTopic"));
+app.use("/api", require("./routes/AddSchool"));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

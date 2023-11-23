@@ -26,8 +26,9 @@ const SidebarAdmin = () => {
     setUserEmail(storedUserEmail);
   }, []);
   const handleLogout = () => {
+    console.log("logooout");
     localStorage.removeItem("token");
-    setIsLoggedin(false);
+    localStorage.removeItem("userEmail");
 
     navigate("/");
   };

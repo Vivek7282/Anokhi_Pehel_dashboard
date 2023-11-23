@@ -7,6 +7,7 @@ import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -17,9 +18,7 @@ const ScorePage = () => {
   useEffect(() => {
     if (studentId) {
       axios
-        .get(
-          `http://localhost:5000/api1/getstudentByUserId?studentid=${studentId}`
-        )
+        .get(`${BASE_URL}/api/getstudentByUserId?studentid=${studentId}`)
         .then((res) => {
           console.log("Fetched mentor data:", res.data); // Log fetched data
           setStudent(res.data); // Assuming the response is an array, take the first item
@@ -29,9 +28,7 @@ const ScorePage = () => {
         });
 
       axios
-        .get(
-          `http://localhost:5000/api6/getMarksByUserId?studentid=${studentId}`
-        )
+        .get(`${BASE_URL}/api/getMarksByUserId?studentid=${studentId}`)
         .then((res1) => {
           //   console.log("Fetched class schedule data:", res1.data); // Log fetched data
           setMarks(res1.data);
@@ -62,7 +59,7 @@ const ScorePage = () => {
         {student ? (
           <div className="mentor-card">
             <img
-              src={`http://localhost:5000/images/${student.photo}`}
+              src={`${BASE_URL}/images/${student.photo}`}
               className="mentor-photo"
             />
 

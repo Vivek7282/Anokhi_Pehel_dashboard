@@ -5,6 +5,7 @@ import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import myImage from "../image/backgroundImage.jpeg";
+import { BASE_URL } from "../Service/helper";
 import Image from "../image/340434.png";
 const AttendancePage = () => {
   const location = useLocation();
@@ -18,7 +19,7 @@ const AttendancePage = () => {
   useEffect(() => {
     if (classId) {
       axios
-        .get(`http://localhost:5000/api1/getStudentsByClass?class=${classId}`)
+        .get(`${BASE_URL}/api/getStudentsByClass?class=${classId}`)
         .then((response) => {
           setStudents(response.data);
           // Initialize the attendanceData object with default values
@@ -62,7 +63,7 @@ const AttendancePage = () => {
 
     // Send the attendance data to the server using Axios
     axios
-      .post("http://localhost:5000/api4/submitAttendance", attendanceSubmission)
+      .post(`${BASE_URL}/api/submitAttendance`, attendanceSubmission)
       .then((response) => {
         console.log(response.data);
         if (response.data === "Attendance submitted successfully") {

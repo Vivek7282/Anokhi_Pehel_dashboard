@@ -4,13 +4,14 @@ import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/login", {
+    const response = await fetch(`${BASE_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,10 +31,10 @@ export default function Login() {
       // Fetch the user's role by email
 
       const email = credentials.email;
-      console.log(email);
+      // console.log(email);
 
       const roleResponse = await fetch(
-        `http://localhost:5000/api2/getUserRoleByEmail?email=${email}`,
+        `${BASE_URL}/api/getUserRoleByEmail?email=${email}`,
         {
           method: "GET",
           headers: {

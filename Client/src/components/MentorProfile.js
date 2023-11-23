@@ -7,6 +7,7 @@ import "../css/ScorePage.css";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const ScorePage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -22,7 +23,7 @@ const ScorePage = () => {
     // Fetch mentor data when the component mounts
     if (userId) {
       axios
-        .get(`http://localhost:5000/api1/getmentorsByUserId?userid=${userId}`)
+        .get(`${BASE_URL}/api/getmentorsByUserId?userid=${userId}`)
         .then((res) => {
           //   console.log("Fetched mentor data:", res.data); // Log fetched data
           setMentor(res.data); // Assuming the response is an array, take the first item
@@ -33,9 +34,7 @@ const ScorePage = () => {
 
       // Fetch class schedule data for the mentor
       axios
-        .get(
-          `http://localhost:5000/api1/getClassScheduleByMentorId?mentorId=${userId}`
-        )
+        .get(`${BASE_URL}/api/getClassScheduleByMentorId?mentorId=${userId}`)
         .then((res1) => {
           //   console.log("Fetched class schedule data:", res1.data); // Log fetched data
           setClassSchedule(res1.data);
@@ -45,9 +44,7 @@ const ScorePage = () => {
         });
 
       axios
-        .get(
-          `http://localhost:5000/api1/getLineScheduleByMentorId?mentorId=${userId}`
-        )
+        .get(`${BASE_URL}/api/getLineScheduleByMentorId?mentorId=${userId}`)
         .then((res2) => {
           //   console.log("Fetched class schedule data:", res2.data); // Log fetched data
           setLineSchedule(res2.data);
@@ -57,9 +54,7 @@ const ScorePage = () => {
         });
 
       axios
-        .get(
-          `http://localhost:5000/api1/getLineSchedule1ByMentorId?mentorId=${userId}`
-        )
+        .get(`${BASE_URL}/api/getLineSchedule1ByMentorId?mentorId=${userId}`)
         .then((res3) => {
           //   console.log("Fetched class schedule data:", res3.data); // Log fetched data
           setLineSchedule1(res3.data);

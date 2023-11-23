@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "./Header";
 import myImage from "../image/backgroundImage.jpeg";
 import Image from "../image/340434.png";
+import { BASE_URL } from "../Service/helper";
 const AttendanceTable = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [filterDate, setFilterDate] = useState(null); // Use null as initial state
@@ -12,7 +13,7 @@ const AttendanceTable = () => {
   useEffect(() => {
     // Fetch attendance data when the component mounts
     axios
-      .get("http://localhost:5000/api5/getAttendance")
+      .get(`${BASE_URL}/api/getAttendance`)
       .then((response) => {
         setAttendanceData(response.data);
 
@@ -40,7 +41,7 @@ const AttendanceTable = () => {
 
     // Make an API call to fetch student names
     axios
-      .post("http://localhost:5000/api1/getStudentNames", {
+      .post(`${BASE_URL}/api/getStudentNames`, {
         studentIds: studentIdArray,
       })
       .then((response) => {

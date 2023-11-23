@@ -5,7 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "../css/ScorePage.css";
 import { Link } from "react-router-dom";
-
+import { BASE_URL } from "../Service/helper";
 import myImage from "../image/backgroundImage.jpeg";
 import profile from "../image/profile.png";
 import Image from "../image/340434.png";
@@ -20,7 +20,7 @@ const WelcomeCard = ({ userEmail }) => {
   useEffect(() => {
     if (userId) {
       axios
-        .get(`http://localhost:5000/api8/getmentorsByEmail?email=${userId}`)
+        .get(`${BASE_URL}/api/getmentorsByEmail?email=${userId}`)
         .then((res) => {
           setUser(res.data); // Assuming the response is an array, take the first item
         })
